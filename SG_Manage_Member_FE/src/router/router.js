@@ -38,7 +38,7 @@ const routes = [
       {
         path: "/admin/user/:id",
         name: "UserDetail",
-        component: () => import("../view/admin/user/UserDetail.vue"),
+        component: () => import("../view/admin/user/userDetail.vue"),
         beforeEnter: requireAuth,
       },
       {
