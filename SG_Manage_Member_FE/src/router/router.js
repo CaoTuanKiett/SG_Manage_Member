@@ -32,13 +32,13 @@ const routes = [
       {
         path: "/admin/user",
         name: "UserView",
-        component: () => import("../view/admin/user/UserView.vue"),
+        component: () => import("../view/admin/user/userView.vue"),
         beforeEnter: requireAuth,
       },
       {
         path: "/admin/user/:id",
         name: "UserDetail",
-        component: () => import("../view/admin/user/userDetail.vue"),
+        component: () => import("../view/admin/user/UserDetail.vue"),
         beforeEnter: requireAuth,
       },
       {
