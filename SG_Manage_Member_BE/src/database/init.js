@@ -111,11 +111,69 @@ db.raw(`CREATE DATABASE IF NOT EXISTS \`${databaseName}\`;`)
   })
   .then(() => {
     console.log('Tạo bảng thành công hoặc bảng đã tồn tại');
-    db.destroy();
+    // db.destroy();
+  })
+  .then(() => {
+    console.log('Tạo bảng thành công hoặc bảng đã tồn tại');
+
+    // Thêm dữ liệu vào bảng "polls"
+    return db('polls').insert([
+      { title: 'Khảo sát 1', create_at: '2023-09-11', create_by: 'Admin' },
+      { title: 'Khảo sát 2', create_at: '2023-09-12', create_by: 'Admin' },
+      // Thêm các dòng dữ liệu khác nếu cần
+    ]);
+  })
+  .then(() => {
+    console.log('Dữ liệu đã được chèn vào bảng "polls"');
+
+    // Thêm dữ liệu vào bảng "options"
+    return db('options').insert([
+      { poll_id: 1, text: 'Tùy chọn A' },
+      { poll_id: 1, text: 'Tùy chọn B' },
+      { poll_id: 2, text: 'Tùy chọn X' },
+      { poll_id: 2, text: 'Tùy chọn Y' },
+      // Thêm các dòng dữ liệu khác nếu cần
+    ]);
+  })
+  .then(() => {
+    console.log('Dữ liệu đã được chèn vào bảng "options"');
+
+    // Thêm dữ liệu vào bảng "account"
+    return db('account').insert([
+      { username: 'user1', password: 'hashedPassword1', salt: 'salt1', create_at: '2023-09-11', create_by: 'Admin' },
+      { username: 'user2', password: 'hashedPassword2', salt: 'salt2', create_at: '2023-09-12', create_by: 'Admin' },
+      // Thêm các dòng dữ liệu khác nếu cần
+    ]);
+  })
+  .then(() => {
+    console.log('Dữ liệu đã được chèn vào bảng "account"');
+
+    // Thêm dữ liệu vào bảng "users"
+    return db('users').insert([
+      { id_account: 1, name: 'Người dùng 1', email: 'user1@example.com', phone: '123456789', address: 'Địa chỉ 1', role: 'user', create_at: '2023-09-11', create_by: 'Admin' },
+      { id_account: 2, name: 'Người dùng 2', email: 'user2@example.com', phone: '987654321', address: 'Địa chỉ 2', role: 'user', create_at: '2023-09-12', create_by: 'Admin' },
+      // Thêm các dòng dữ liệu khác nếu cần
+    ]);
+  })
+  .then(() => {
+    console.log('Dữ liệu đã được chèn vào bảng "users"');
+
+    // Thêm dữ liệu vào bảng "user_options"
+    return db('user_options').insert([
+      { user_id: 1, option_id: 1 },
+      { user_id: 1, option_id: 2 },
+      { user_id: 2, option_id: 3 },
+      { user_id: 2, option_id: 4 },
+      // Thêm các dòng dữ liệu khác nếu cần
+    ]);
+  })
+  .then(() => {
+    console.log('Dữ liệu đã được chèn vào bảng "user_options"');
+    db.destroy(); // Đóng kết nối cơ sở dữ liệu sau khi đã chèn dữ liệu
   })
   .catch((error) => {
-    console.error('Lỗi khi tạo bảng hoặc cơ sở dữ liệu:', error);
-    db.destroy();
+    console.error('Lỗi khi thao tác với cơ sở dữ liệu:', error);
+    db.destroy(); // Đóng kết nối cơ sở dữ liệu nếu có lỗi
     throw error;
   });
 
