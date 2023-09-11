@@ -6,9 +6,12 @@
   import { useRoute, useRouter } from 'vue-router';
   import { notify } from '@kyvg/vue3-notification';
 
+
   const router = useRouter();
   const route = useRoute();
   const userId = route.params.id;
+
+  const URL_BE = import.meta.env.VITE_APP_BASE_BE
 
   const DataUser = ref({
     id: "",
@@ -78,7 +81,7 @@
 
   const getUser = (id) => {
    axios
-      .get(`http://localhost:3000/api/v1/users/${id}`)
+      .get(`${URL_BE}/api/v1/users/${id}`)
       .then((response) => {
         const data = response.data[0];
         console.log(data);
@@ -112,7 +115,7 @@
     if(validate()){
       if(userId != 0){
         axios
-        .put(`http://localhost:3000/api/v1/users/${userId}`, DataUser.value)
+        .put(`${URL_BE}/api/v1/users/${userId}`, DataUser.value)
         .then((response) => {
           console.log(response);
           notify({
@@ -128,7 +131,7 @@
       }
       
         axios
-        .post(`http://localhost:3000/api/v1/users`, DataUser.value)
+        .post(`${URL_BE}/api/v1/users`, DataUser.value)
         .then((response) => {
           console.log(response);
           notify({

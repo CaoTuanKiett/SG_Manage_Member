@@ -10,6 +10,7 @@ import { useAuthStore } from "../../../store/authStore"
 import AddUserCard from "../../../components/itemComponents/AddUserCard.vue";
 import AddSearch from "../../../components/itemComponents/AddSearch.vue";
 
+
 export default defineComponent({
     name: "UserView",
     components: {
@@ -18,6 +19,8 @@ export default defineComponent({
     },
     emits: ['clickShowPopup', 'clickCloseAllPopup', 'clickOnDelete', 'clickEditUser', 'update:searchKeyword'],
     setup() {
+        const URL_BE = import.meta.env.VITE_APP_BASE_BE
+        
         const userData = ref([]);
         const searchKeyword = ref("");
         const router = useRouter();
@@ -69,8 +72,8 @@ export default defineComponent({
         };
         const onDelete = (id) => {
             closeAllPopup();
-            axios
-                .delete("http://localhost:3000/api/v1/users/" + id)
+            axios 
+                .delete(`${URL_BE}/api/v1/users/${id}`)
                 .then((response) => {
                 notify({
                     title: "Delete Success",
@@ -90,7 +93,7 @@ export default defineComponent({
         };
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/v1/users");
+                const response = await axios.get(`${URL_BE}/api/v1/users`);
                 return userData.value = response.data;
             }
             catch (error) {

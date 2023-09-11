@@ -6,3 +6,22 @@ BE
 FE
 	yarn install
 	yarn build
+
+
+docker
+	sudo docker stop .....
+
+mysql
+	sudo service mysql status
+	sudo service mysql start
+	sudo service mysql stop
+	
+	mysql -u root -p
+	SHOW DATABASES;
+	node src/database/init.js
+
+
+SG_Manage_Member
+SG_Manage_Member_FE
+SG_Manage_Member_BE
+

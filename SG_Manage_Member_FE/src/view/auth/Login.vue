@@ -1,6 +1,6 @@
 
 <script>
-  import { ref, unref } from "vue";
+  import { ref } from "vue";
   import axios from "axios";
   import { notify } from "@kyvg/vue3-notification";
   import Cookies from 'js-cookie';
@@ -9,9 +9,16 @@
   import AuthLayout from "../../layouts/AuthLayout.vue";
   import { useAuthStore } from "../../store/authStore.js"
 
+
+
   export default {
     name: "LoginView",
     setup() {
+
+        const URL_BE = import.meta.env.VITE_APP_BASE_BE
+
+        console.log(URL_BE);
+
         const username = ref("");
         const password = ref("");
         const router = useRouter();
@@ -58,7 +65,7 @@
         };
         const login = () => {
             axios
-                .post("http://localhost:3000/api/v1/auth/login", {
+                .post(`${URL_BE}/api/v1/auth/login`, {
                 username: username.value,
                 password: password.value,
             })
@@ -83,7 +90,7 @@
         
         const signUp = () => {
             axios
-                .post("http://localhost:3000/api/v1/auth/register", {
+                .post(`${URL_BE}/api/v1/auth/register`, {
                 username: username.value,
                 password: password.value,
             })
