@@ -1,27 +1,111 @@
+
+
+download .pem
+icacls SGroupManage.pem /inheritance:r /grant:r "%username%:R"
+
+
+-cài DOCKER
+sudo apt update
+Cài đặt các gói cần thiết để cho phép APT sử dụng gói qua HTTPS:
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+Thêm kho lưu trữ Docker GPG key:
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+Thêm kho lưu trữ Docker vào danh sách nguồn (source list):
+echo "deb [signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+Cài đặt Docker
+sudo apt install docker-ce
+Khởi động và kích hoạt Docke
+sudo systemctl start docker
+sudo systemctl enable docker
+docker --version
+
+- cài git
+sudo apt update
+sudo apt install git
+git --version
+
+- cài NODE JS
+sudo apt update
+sudo apt install curl
+sudo apt install nodejs
+
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update
+sudo apt install yarn
+
+node --version
+npm --version
+yarn --version
+
+
+- cài MYSQL
+sudo apt update
+sudo apt install mysql-server
+sudo systemctl status mysql
+
+- cài NGINX
+sudo apt update
+sudo apt install nginx
+sudo systemctl start nginx
+sudo systemctl enable nginx
+sudo systemctl status nginx
+sudo systemctl stop nginx
+
+=== 
+-clone git
+
 BE 
 	npm i
 	npm run build-src
+	node src/database/init.js
 
---------
 FE
 	yarn install
+	nano .env
+	(sửa localhost)
 	yarn build
+
+
+================
 
 
 docker
 	sudo docker stop .....
 
+	xóa tất cả
+	sudo docker rm $(sudo docker ps -a -q)
+	sudo docker rmi $(sudo docker images -a -q)
+
+
 mysql
 	sudo service mysql status
 	sudo service mysql start
 	sudo service mysql stop
+
+	sudo mysql
+	ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456789';
+
+
+
+
 	
 	mysql -u root -p
 	SHOW DATABASES;
+	CREATE DATABASE sgrmanage;
+	 CREATE DATABASE managemember;
+
 	node src/database/init.js
 
 
 SG_Manage_Member
 SG_Manage_Member_FE
 SG_Manage_Member_BE
+
+
+==================================
+
+
+
 
