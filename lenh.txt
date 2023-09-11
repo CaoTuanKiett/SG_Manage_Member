@@ -1,0 +1,8 @@
+BE 
+	npm i
+	npm run build-src
+
+--------
+FE
+	yarn install
+	yarn build
