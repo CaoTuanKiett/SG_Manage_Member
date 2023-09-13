@@ -1,7 +1,7 @@
 
 
 download .pem
-icacls SGroupManage.pem /inheritance:r /grant:r "%username%:R"
+icacls SGroupp.pem /inheritance:r /grant:r "%username%:R"
 
 
 -cài DOCKER
@@ -34,6 +34,8 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt update
 sudo apt install yarn
+sudo apt install npm
+
 
 node --version
 npm --version
@@ -54,25 +56,36 @@ sudo systemctl status nginx
 sudo systemctl stop nginx
 
 === 
--clone git
+-clone 
+	git clone https://github.com/CaoTuanKiett/SG_Manage_Member.git
 
 BE 
+	cd SG_Manage_Member/SG_Manage_Member_BE
 	npm i
 	npm run build-src
 	node src/database/init.js
 
 FE
+	cd SG_Manage_Member/SG_Manage_Member_FE
 	yarn install
 	nano .env
 	(sửa localhost)
 	yarn build
 
+Production
+	cd SG_Manage_Member/Production
+	sudo rm -rf docker/
 
+	sudo docker compose -p sg_manage up -d
 ================
 
+lưu ý: sửa tên database trong file docker compose
 
 docker
+	sudo docker ps
 	sudo docker stop .....
+
+	sudo docker logs
 
 	xóa tất cả
 	sudo docker rm $(sudo docker ps -a -q)
@@ -107,5 +120,9 @@ SG_Manage_Member_BE
 ==================================
 
 
+docker compose -p sg_manage up -d
 
+sudo rm -rf
+
+src/view/auth
 

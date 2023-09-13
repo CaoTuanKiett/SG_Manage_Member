@@ -5,12 +5,13 @@ services:
     restart: 'always'
     environment:
       MYSQL_ROOT_PASSWORD: 123456789
-      MYSQL_DATABASE: nodejsbasic
+      MYSQL_DATABASE: sgrtest
       TZ: UTC
     ports:
       - 3306:3306
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
+      - ../SG_Manage_Member_BE/src/database/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql  # Thêm dòng này
     networks:
       - example-network
     healthcheck:
