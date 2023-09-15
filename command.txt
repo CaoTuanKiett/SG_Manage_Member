@@ -1,20 +1,26 @@
 
-
+-thiết lập SSH Client
 download .pem
 icacls SGroupp.pem /inheritance:r /grant:r "%username%:R"
 
 
 -cài DOCKER
 sudo apt update
+
 Cài đặt các gói cần thiết để cho phép APT sử dụng gói qua HTTPS:
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+
 Thêm kho lưu trữ Docker GPG key:
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
 Thêm kho lưu trữ Docker vào danh sách nguồn (source list):
 echo "deb [signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
 sudo apt update
+
 Cài đặt Docker
 sudo apt install docker-ce
+
 Khởi động và kích hoạt Docke
 sudo systemctl start docker
 sudo systemctl enable docker
@@ -27,11 +33,12 @@ git --version
 
 - cài NODE JS
 sudo apt update
-sudo apt install curl
-sudo apt install nodejs
 
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+Nếu bạn cần cài đặt phiên bản khác, ví dụ 14.x, chỉ cần thay đổi setup_18.x bằng setup_14.x
+
+sudo apt install nodejs -y
+
 sudo apt update
 sudo apt install yarn
 sudo apt install npm
@@ -85,7 +92,7 @@ docker
 	sudo docker ps
 	sudo docker stop .....
 
-	sudo docker logs
+	sudo docker logs ....
 
 	xóa tất cả
 	sudo docker rm $(sudo docker ps -a -q)
@@ -97,6 +104,7 @@ mysql
 	sudo service mysql start
 	sudo service mysql stop
 
+thiết lập username password cho mysql
 	sudo mysql
 	ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456789';
 
@@ -107,8 +115,8 @@ mysql
 	mysql -u root -p
 	SHOW DATABASES;
 	CREATE DATABASE sgrmanage;
-	 CREATE DATABASE managemember;
 
+tảo bảng, thêm dữ liệu
 	node src/database/init.js
 
 
@@ -122,6 +130,7 @@ SG_Manage_Member_BE
 
 docker compose -p sg_manage up -d
 
+xóa file
 sudo rm -rf
 
 src/view/auth

@@ -5,7 +5,7 @@ services:
     restart: 'always'
     environment:
       MYSQL_ROOT_PASSWORD: 123456789
-      MYSQL_DATABASE: sgrtest
+      MYSQL_DATABASE: sgrmanage
       TZ: UTC
     ports:
       - 3306:3306
